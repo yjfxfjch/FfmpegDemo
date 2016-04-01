@@ -1,3 +1,17 @@
+/*
+*      Filename:  SDL_video_play.cpp
+*
+*   Description:  Read video from a file and decode it.Convert the decoded frame to YUV420P
+*                 and play it by using SDL2.0
+*       Version:  1.0
+*       Created:  2016-4-1
+*      Revision:  none
+*      Compiler:  Visual Studio 2015 update 1
+*
+*        Author:  Jeff Young
+*       Company:  Home
+*/
+
 #include <stdio.h>
 #ifdef __cplusplus
 extern "C" {
@@ -141,8 +155,6 @@ int main(int argc, char *argv[]) {
 	}
 
 	sdlRenderer = SDL_CreateRenderer(screen, -1, 0);
-	//IYUV: Y + U + V  (3 planes)  
-	//YV12: Y + V + U  (3 planes)  
 	sdlTexture = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_IYUV, SDL_TEXTUREACCESS_STREAMING, pCodecCtx->width, pCodecCtx->height);
 
 	sdlRect.x = 0;
@@ -171,7 +183,6 @@ int main(int argc, char *argv[]) {
 				SDL_RenderCopy(sdlRenderer, sdlTexture, NULL, &sdlRect);
 				SDL_RenderPresent(sdlRenderer);
 				//SDL End-----------------------  
-				//Delay 40ms 
 				double time = (double)packet.duration*1000/( ((*(pFormatCtx->streams))->time_base.den )/((*(pFormatCtx->streams))->time_base.num) );
 				SDL_Delay(time);
 				

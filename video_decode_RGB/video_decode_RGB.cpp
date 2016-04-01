@@ -1,10 +1,10 @@
 /*
 *      Filename:  video_deocde_RGB.cpp
 *
-*   Description: Read video from a file and decode it.Convert the decoded frame to RGB 
+*   Description:  Read video from a file and decode it.Convert the decoded frame to RGB 
 *                 and save to picture in the PPM format
 *       Version:  1.0
-*       Created:  2016Äê4ÔÂ1ÈÕ
+*       Created:  2016-4-1
 *      Revision:  none
 *      Compiler:  Visual Studio 2015 update 1
 *
