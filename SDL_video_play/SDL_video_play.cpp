@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
 	uint8_t           *buffer = nullptr;
 	struct SwsContext *sws_ctx = nullptr;
 
-	const char *inputFile = "G:\\22.mp4";
+	const char *inputFile = "G:\\test.flv";
 
 	//SDL---------------------------  
 	int screen_w = 0, screen_h = 0;
@@ -112,13 +112,13 @@ int main(int argc, char *argv[]) {
 	if (pFrameYUV == NULL)
 		return -1;
 
-	// Determine required buffer size and allocate buffer£ºwidth*height*3(24bits)
-	numBytes = av_image_get_buffer_size(AV_PIX_FMT_RGB24, pCodecCtx->width,
+	// Determine required buffer size and allocate buffer
+	numBytes = av_image_get_buffer_size(AV_PIX_FMT_YUV420P, pCodecCtx->width,
 		pCodecCtx->height, 1);
 	buffer = (uint8_t *)av_malloc(numBytes*sizeof(uint8_t));
 
-	// Assign appropriate parts of buffer to image planes in pFrameRGB
-	// Note that pFrameRGB is an AVFrame, but AVFrame is a superset
+	// Assign appropriate parts of buffer to image planes in pFrameYUV
+	// Note that pFrameYUV is an AVFrame, but AVFrame is a superset
 	// of AVPicture
 	int linesize = 0;
 	av_image_fill_arrays(pFrameYUV->data, pFrameYUV->linesize, buffer, AV_PIX_FMT_YUV420P,
@@ -172,7 +172,7 @@ int main(int argc, char *argv[]) {
 
 			// Did we get a video frame?
 			if (frameFinished) {
-				// Convert the image from its native format to RGB
+				// Convert the image from its native format to YUV
 				sws_scale(sws_ctx, (uint8_t const * const *)pFrame->data,
 					pFrame->linesize, 0, pCodecCtx->height,
 					pFrameYUV->data, pFrameYUV->linesize);

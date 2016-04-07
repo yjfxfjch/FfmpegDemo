@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
 	uint8_t           *buffer = nullptr;
 	struct SwsContext *sws_ctx = nullptr;
 
-	const char *inputFile = "G:\\a.mp4";
+	const char *inputFile = "G:\\test.flv";
 
 	// Register all formats and codecs
 	av_register_all();
